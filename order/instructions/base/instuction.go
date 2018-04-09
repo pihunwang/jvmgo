@@ -29,7 +29,7 @@ func (self *BranchInstruction) FetchOperands(reader *BytecodeReader) {
 
 // 存储和加载类指令,需要根据索引存取局部变量表
 type Index8Instruction struct {
-	Index int
+	Index uint
 }
 
 func (self *Index8Instruction) FetchOperands(reader *BytecodeReader) {

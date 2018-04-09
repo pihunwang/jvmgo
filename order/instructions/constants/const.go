@@ -25,6 +25,10 @@ type FCONST_1 struct {
 	base.NoOperandsInstruction
 }
 
+type FCONST_2 struct {
+	base.NoOperandsInstruction
+}
+
 type ICONST_M1 struct {
 	base.NoOperandsInstruction
 }
@@ -78,6 +82,10 @@ func (self *FCONST_0) Execute(frame *rtda.Frame) {
 
 func (self *FCONST_1) Execute(frame *rtda.Frame) {
 	frame.OperandStack().PushFloat(1.0)
+}
+
+func (self *FCONST_2) Execute(frame *rtda.Frame) {
+	frame.OperandStack().PushFloat(2.0)
 }
 
 func (self *ICONST_M1) Execute(frame *rtda.Frame) {

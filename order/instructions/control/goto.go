@@ -1,4 +1,4 @@
-package comparisons
+package control
 
 import (
 	"jvmgo/order/instructions/base"
