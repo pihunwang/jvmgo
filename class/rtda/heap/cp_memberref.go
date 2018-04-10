@@ -11,5 +11,6 @@ type MemberRef struct {
 }
 
 func (self *MemberRef) copyMemberRefInfo(refInfo *classfile.ConstantMemberrefInfo) {
-
+	self.className = refInfo.ClassName()
+	self.name, self.descriptor = refInfo.NameAndDescriptor()
 }
