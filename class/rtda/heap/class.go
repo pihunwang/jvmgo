@@ -2,6 +2,7 @@ package heap
 
 import (
 	"jvmgo/class/classfile"
+	"strings"
 )
 
 type Class struct {
@@ -34,4 +35,16 @@ func newClass(cf *classfile.ClassFile) *Class {
 
 func (self *Class) IsPublic() bool {
 	return 0 != self.accessFlags & ACC_PUBLIC
+}
+
+// 如果类D想访问类C,需要满足两个条件之一:C是public,C和D在同一个运行时包内
+func (self *Class) isAccessibleTo(other *Class) bool {
+	return self.IsPublic() || self.getPackageName() == other.getPackageName()
+}
+
+func (self *Class) getPackageName() string {
+	if i := strings.LastIndex(self.name, "/"); i >= 0 {
+		return self.name[:i]
+	}
+	return ""
 }

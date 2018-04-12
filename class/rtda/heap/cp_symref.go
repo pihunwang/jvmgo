@@ -5,3 +5,19 @@ type SymRef struct {
 	className string
 	class     *Class
 }
+
+func (self *SymRef) ResolvedClass() *Class {
+	if self.class == nil {
+		self.ResolveClassRef()
+	}
+	return self.class
+}
+
+func (self *SymRef) resolveClassRef() {
+	d := self.cp.class
+	c := d.loader.LoadClass(self.className)
+	if !c.isAccessibleTo(d) {
+		panic("java.lang.IllegalAcessError")
+	}
+	self.class = c
+}
