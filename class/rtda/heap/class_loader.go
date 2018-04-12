@@ -89,5 +89,50 @@ func verify(class *Class) {
 }
 
 func prepare(class *Class) {
+	// 计算实例字段的个数,并给他们编号
+	calcInstanceFieldSlotIds(class)
+	// 计算静态字段的个数,并给他们编号
+	calcStaticFieldSlotIds(class)
+	// 给类变量分配空间,然后给它们赋初始值
+	allocAndInitStaticVars(class)
+}
 
+func calcInstanceFieldSlotIds(class *Class) {
+	slotId := uint(0)
+	if class.superClass != nil {
+		slotId = class.superClass.instanceSlotCount
+	}
+	for _, field := range class.fields {
+		if !field.IsStatic() {
+			field.slotId = slotId
+			slotId ++
+			if field.isLongOrDouble() {
+				slotId ++
+			}
+		}
+	}
+	class.instanceSlotCount = slotId
+}
+
+func calcStaticFieldSlotIds(class *Class) {
+	slotId := uint(0)
+	for _, field := range class.fields {
+		if field.IsStatic() {
+			field.slotId = slotId
+			slotId++
+			if field.isLongOrDouble() {
+				slotId++
+			}
+		}
+	}
+	class.staticSlotCount = slotId
+}
+
+func allocAndInitStaticVars(class *Class) {
+	class.staticVars = newSlots(class.staticSlotCount)
+	for _, field := range class.fields {
+		if field.IsStatic() && field.IsFinal() {
+			initStaticFinalVar(class, field)
+		}
+	}
 }

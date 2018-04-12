@@ -6,6 +6,7 @@ import (
 
 type Field struct {
 	ClassMember
+	slotId uint
 }
 
 func newFields(class *Class, cfFields []*classfile.MemberInfo) []*Field {
@@ -16,4 +17,8 @@ func newFields(class *Class, cfFields []*classfile.MemberInfo) []*Field {
 		fields[i].copyMemberInfo(cfField)
 	}
 	return fields
+}
+
+func (self *Field) isLongOrDouble() bool {
+	return self.descriptor == "J" || self.descriptor == "D"
 }
