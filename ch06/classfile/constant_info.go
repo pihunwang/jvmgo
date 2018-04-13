@@ -1,23 +1,29 @@
 package classfile
 
-// tag常量值定义
+// Constant pool tags
 const (
-	CONSTANT_Class = 7
-	CONSTANT_Fieldref = 9
-	CONSTANT_Methodref = 10
+	CONSTANT_Class              = 7
+	CONSTANT_Fieldref           = 9
+	CONSTANT_Methodref          = 10
 	CONSTANT_InterfaceMethodref = 11
-	CONSTANT_String = 8
-	CONSTANT_Integer = 3        // int,boolean,byte,short
-	CONSTANT_Float = 4
-	CONSTANT_Long = 5
-	CONSTANT_Double = 6
-	CONSTANT_NameAndType = 12
-	CONSTANT_Utf8 = 1
-	CONSTANT_MethodHandle = 15
-	CONSTANT_MethodType = 16
-	CONSTANT_InvokeDynamic = 18
+	CONSTANT_String             = 8
+	CONSTANT_Integer            = 3
+	CONSTANT_Float              = 4
+	CONSTANT_Long               = 5
+	CONSTANT_Double             = 6
+	CONSTANT_NameAndType        = 12
+	CONSTANT_Utf8               = 1
+	CONSTANT_MethodHandle       = 15
+	CONSTANT_MethodType         = 16
+	CONSTANT_InvokeDynamic      = 18
 )
 
+/*
+cp_info {
+    u1 tag;
+    u1 info[];
+}
+*/
 type ConstantInfo interface {
 	readInfo(reader *ClassReader)
 }
@@ -29,8 +35,9 @@ func readConstantInfo(reader *ClassReader, cp ConstantPool) ConstantInfo {
 	return c
 }
 
+// todo ugly code
 func newConstantInfo(tag uint8, cp ConstantPool) ConstantInfo {
-	switch tag{
+	switch tag {
 	case CONSTANT_Integer:
 		return &ConstantIntegerInfo{}
 	case CONSTANT_Float:
@@ -59,6 +66,7 @@ func newConstantInfo(tag uint8, cp ConstantPool) ConstantInfo {
 		return &ConstantMethodHandleInfo{}
 	case CONSTANT_InvokeDynamic:
 		return &ConstantInvokeDynamicInfo{}
-	default:panic("java.lang.ClassFormatError: constant pool tag!")
+	default:
+		panic("java.lang.ClassFormatError: constant pool tag!")
 	}
 }
