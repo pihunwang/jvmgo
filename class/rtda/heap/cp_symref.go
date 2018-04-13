@@ -8,7 +8,7 @@ type SymRef struct {
 
 func (self *SymRef) ResolvedClass() *Class {
 	if self.class == nil {
-		self.ResolveClassRef()
+		self.resolveClassRef()
 	}
 	return self.class
 }

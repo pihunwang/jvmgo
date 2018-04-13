@@ -147,7 +147,7 @@ func initStaticFinalVar(class *Class, field *Field) {
 		case "Z", "B", "C", "S", "I":
 			val := cp.GetConstant(cpIndex).(int32)
 			vars.SetInt(slotId, val)
-		case "J"
+		case "J":
 			val := cp.GetConstant(cpIndex).(int64)
 			vars.SetLong(slotId, val)
 		case "F":

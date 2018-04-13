@@ -12,6 +12,7 @@ import (
 	. "jvmgo/class/instructions/math"
 	. "jvmgo/class/instructions/stack"
 	. "jvmgo/class/instructions/stores"
+	. "jvmgo/class/instructions/references"
 )
 
 // NoOperandsInstruction singletons
@@ -52,14 +53,14 @@ var (
 	aload_1 = &ALOAD_1{}
 	aload_2 = &ALOAD_2{}
 	aload_3 = &ALOAD_3{}
-	// iaload      = &IALOAD{}
-	// laload      = &LALOAD{}
-	// faload      = &FALOAD{}
-	// daload      = &DALOAD{}
-	// aaload      = &AALOAD{}
-	// baload      = &BALOAD{}
-	// caload      = &CALOAD{}
-	// saload      = &SALOAD{}
+	//iaload = &IALOAD{}
+	//laload = &LALOAD{}
+	//faload = &FALOAD{}
+	//daload = &DALOAD{}
+	//aaload = &AALOAD{}
+	//baload = &BALOAD{}
+	//caload = &CALOAD{}
+	//saload = &SALOAD{}
 	istore_0 = &ISTORE_0{}
 	istore_1 = &ISTORE_1{}
 	istore_2 = &ISTORE_2{}
@@ -204,12 +205,12 @@ func NewInstruction(opcode byte) base.Instruction {
 		return &BIPUSH{}
 	case 0x11:
 		return &SIPUSH{}
-	// case 0x12:
-	// 	return &LDC{}
-	// case 0x13:
-	// 	return &LDC_W{}
-	// case 0x14:
-	// 	return &LDC2_W{}
+	case 0x12:
+		return &LDC{}
+	case 0x13:
+		return &LDC_W{}
+	case 0x14:
+		return &LDC2_W{}
 	case 0x15:
 		return &ILOAD{}
 	case 0x16:
@@ -526,24 +527,24 @@ func NewInstruction(opcode byte) base.Instruction {
 	// 	return _return
 	//	case 0xb2:
 	//		return &GET_STATIC{}
-	// case 0xb3:
-	// 	return &PUT_STATIC{}
-	// case 0xb4:
-	// 	return &GET_FIELD{}
-	// case 0xb5:
-	// 	return &PUT_FIELD{}
-	//	case 0xb6:
-	//		return &INVOKE_VIRTUAL{}
-	// case 0xb7:
-	// 	return &INVOKE_SPECIAL{}
+	case 0xb3:
+		return &PUT_STATIC{}
+	case 0xb4:
+		return &GET_FIELD{}
+	case 0xb5:
+		return &PUT_FIELD{}
+	case 0xb6:
+		return &INVOKE_VIRTUAL{}
+	case 0xb7:
+		return &INVOKE_SPECIAL{}
 	// case 0xb8:
 	// 	return &INVOKE_STATIC{}
 	// case 0xb9:
 	// 	return &INVOKE_INTERFACE{}
 	// case 0xba:
 	// 	return &INVOKE_DYNAMIC{}
-	// case 0xbb:
-	// 	return &NEW{}
+	case 0xbb:
+		return &NEW{}
 	// case 0xbc:
 	// 	return &NEW_ARRAY{}
 	// case 0xbd:
@@ -552,10 +553,10 @@ func NewInstruction(opcode byte) base.Instruction {
 	// 	return arraylength
 	// case 0xbf:
 	// 	return athrow
-	// case 0xc0:
-	// 	return &CHECK_CAST{}
-	// case 0xc1:
-	// 	return &INSTANCE_OF{}
+	case 0xc0:
+		return &CHECK_CAST{}
+	case 0xc1:
+		return &INSTANCE_OF{}
 	// case 0xc2:
 	// 	return monitorenter
 	// case 0xc3:

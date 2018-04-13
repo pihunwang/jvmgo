@@ -2,7 +2,6 @@ package heap
 
 import (
 	"math"
-	"container/heap"
 )
 
 type Slot struct {

@@ -1,5 +1,16 @@
 package rtda
 
+import "jvmgo/class/rtda/heap"
+
+/*
+JVM
+  Thread
+    pc
+    Stack
+      Frame
+        LocalVars
+        OperandStack
+*/
 type Thread struct {
 	pc    int
 	stack *Stack
@@ -11,8 +22,8 @@ func NewThread() *Thread {
 	}
 }
 
-func (self *Thread) NewFrame(maxLocals, maxStack uint) *Frame {
-	return newFrame(self, maxLocals, maxStack)
+func (self *Thread) NewFrame(method *heap.Method) *Frame {
+	return newFrame(self, method)
 }
 
 func (self *Thread) PC() int {
