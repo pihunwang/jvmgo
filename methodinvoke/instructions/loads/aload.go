@@ -1,7 +1,7 @@
 package loads
 
-import "jvmgo/ch06/instructions/base"
-import "jvmgo/ch06/rtda"
+import "jvmgo/methodinvoke/instructions/base"
+import "jvmgo/methodinvoke/rtda"
 
 // Load reference from local variable
 type ALOAD struct{ base.Index8Instruction }

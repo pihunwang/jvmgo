@@ -1,8 +1,8 @@
 package heap
 
 import "fmt"
-import "jvmgo/ch06/classfile"
-import "jvmgo/ch06/classpath"
+import "jvmgo/methodinvoke/classfile"
+import "jvmgo/methodinvoke/classpath"
 
 /*
 class names:

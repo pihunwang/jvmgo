@@ -1,8 +1,8 @@
 package references
 
-import "jvmgo/ch06/instructions/base"
-import "jvmgo/ch06/rtda"
-import "jvmgo/ch06/rtda/heap"
+import "jvmgo/methodinvoke/instructions/base"
+import "jvmgo/methodinvoke/rtda"
+import "jvmgo/methodinvoke/rtda/heap"
 
 // Fetch field from object
 type GET_FIELD struct{ base.Index16Instruction }

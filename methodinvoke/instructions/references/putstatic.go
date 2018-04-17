@@ -1,8 +1,8 @@
 package references
 
-import "jvmgo/ch06/instructions/base"
-import "jvmgo/ch06/rtda"
-import "jvmgo/ch06/rtda/heap"
+import "jvmgo/methodinvoke/instructions/base"
+import "jvmgo/methodinvoke/rtda"
+import "jvmgo/methodinvoke/rtda/heap"
 
 // Set static field in class
 type PUT_STATIC struct{ base.Index16Instruction }

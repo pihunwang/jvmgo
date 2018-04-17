@@ -1,6 +1,6 @@
 package base
 
-import "jvmgo/ch06/rtda"
+import "jvmgo/methodinvoke/rtda"
 
 func Branch(frame *rtda.Frame, offset int) {
 	pc := frame.Thread().PC()
