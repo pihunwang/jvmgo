@@ -1,6 +1,9 @@
 package heap
 
-import "jvmgo/methodinvoke/classfile"
+import (
+	"jvmgo/methodinvoke/classfile"
+	"jvmgo-book/v1/code/go/src/jvmgo/ch07/rtda/heap"
+)
 
 type MethodRef struct {
 	MemberRef
@@ -23,6 +26,25 @@ func (self *MethodRef) ResolvedMethod() *Method {
 
 // jvms8 5.4.3.3
 func (self *MethodRef) resolveMethodRef() {
-	//class := self.Class()
-	// todo
+	d := self.cp.class
+	c := self.ResolvedClass()
+	if c.IsInterface() {
+		panic("java.lang.IncompatibleClassChangeError")
+	}
+	method := lookupMethod(c, self.name, self.descriptor)
+	if method == nil {
+		panic("java.lang.NoSuchMethodError")
+	}
+	if !method.isAccessibleTo(d) {
+		panic("java.lang.IllegalAccessError")
+	}
+	self.method = method
+}
+
+func lookupMethod(class *Class, name, descriptor string) *Method {
+	method := heap.LookupMethodInClass(class, name, descriptor)
+	if method == nil {
+		method = lookupMethodInInterfaces(class.interfaces, name, descriptor)
+	}
+	return method
 }
