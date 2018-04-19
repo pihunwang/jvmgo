@@ -2,7 +2,6 @@ package heap
 
 import (
 	"jvmgo/methodinvoke/classfile"
-	"jvmgo-book/v1/code/go/src/jvmgo/ch07/rtda/heap"
 )
 
 type MethodRef struct {
@@ -42,7 +41,7 @@ func (self *MethodRef) resolveMethodRef() {
 }
 
 func lookupMethod(class *Class, name, descriptor string) *Method {
-	method := heap.LookupMethodInClass(class, name, descriptor)
+	method := LookupMethodInClass(class, name, descriptor)
 	if method == nil {
 		method = lookupMethodInInterfaces(class.interfaces, name, descriptor)
 	}
