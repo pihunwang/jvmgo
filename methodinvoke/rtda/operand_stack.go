@@ -40,14 +40,14 @@ func (self *OperandStack) PopFloat() float32 {
 // long consumes two slots
 func (self *OperandStack) PushLong(val int64) {
 	self.slots[self.size].num = int32(val)
-	self.slots[self.size+1].num = int32(val >> 32)
+	self.slots[self.size + 1].num = int32(val >> 32)
 	self.size += 2
 }
 func (self *OperandStack) PopLong() int64 {
 	self.size -= 2
 	low := uint32(self.slots[self.size].num)
-	high := uint32(self.slots[self.size+1].num)
-	return int64(high)<<32 | int64(low)
+	high := uint32(self.slots[self.size + 1].num)
+	return int64(high) << 32 | int64(low)
 }
 
 // double consumes two slots
@@ -78,4 +78,8 @@ func (self *OperandStack) PushSlot(slot Slot) {
 func (self *OperandStack) PopSlot() Slot {
 	self.size--
 	return self.slots[self.size]
+}
+
+func (self *OperandStack) GetRefFromTop(n uint) *heap.Object {
+	return self.slots[self.size - 1 - n].ref
 }
